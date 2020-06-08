@@ -5,7 +5,7 @@ if (window.location.protocol == "https:") {
 };
 
 var inbox = new WebSocket(ws_scheme + location.host + "/receive");
-//var outbox = new WebSocket(ws_scheme + location.host + "/submit");
+var outbox = new WebSocket(ws_scheme + location.host + "/submit");
 console.debug("FOO FOO" + ws_scheme + location.host + "/receive")
 
 inbox.onmessage = function(message){
@@ -16,11 +16,11 @@ inbox.onmessage = function(message){
   }, 800);
 };
 
-/*
+
 $("#input-form").on("submit", function(event){
   event.preventDefault();
   var handle = $('#input-handle')[0].value;
   var text = $('#input-text')[0].value;
   outbox.send(JSON.stringify({ handle: handle, text: text}));
   $('#input-text')[0].value="";
-});*/
+});
