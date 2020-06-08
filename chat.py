@@ -1,6 +1,6 @@
 import os
 import logging
-import redis
+import json
 import gevent
 from flask import Flask, render_template
 from flask_sockets import Sockets
@@ -42,10 +42,8 @@ def inbox(ws):
     message = ws.receive()
     if message:
       app.logger.info(u'Got message: {}'.format(message))
-      data = message.get('data')
-      if message['type'] == 'message':
-        app.logger.info(u'Broadcasting data: {}'.format(data))
-        chats.send_to_all_clients(data)
+      app.logger.info(u'Broadcasting to all clients')
+      chats.send_to_all_clients(data)
 
 @sockets.route('/receive')
 def outbox(ws):
