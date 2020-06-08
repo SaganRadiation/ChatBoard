@@ -43,12 +43,8 @@ def inbox(ws):
     if message:
       app.logger.info(u'Got message: {}'.format(message))
       app.logger.info(u'Broadcasting to all clients')
-      chats.send_to_all_clients(data)
+      chats.send_to_all_clients(message)
 
 @sockets.route('/receive')
 def outbox(ws):
   chats.register(ws)
-
-  while not ws.closed:
-    gevent.sleep(0.1)
-
