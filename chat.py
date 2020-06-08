@@ -47,7 +47,7 @@ def inbox(ws):
         app.logger.info(u'Broadcasting data: {}'.format(data))
         chats.send_to_all_clients(data)
 
-@sockets.route('/receive/')
+@sockets.route('/receive')
 def outbox(ws):
   chats.register(ws)
 
